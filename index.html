@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+  <title>Angular Material - Starter App</title>
+  <!-- <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,700'> -->
+  <!-- <link rel="stylesheet" href="./node_modules/angular-material/angular-material.css"/> -->
+  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="./node_modules/bootstrap-material-design/dist/css/bootstrap-material-design.css" />
+  <link rel="stylesheet" href="./node_modules/font-awesome/css/font-awesome.css" />
+  <link rel="stylesheet" href="./node_modules/ngprogress/ngProgress.css" />
+  <link rel="stylesheet" href="./assets/app.css" />
+</head>
+
+<body ng-cloak>
+
+  <div class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+        <a class="navbar-brand" href="javascript:void(0)">
+          <span class="fa fa-address-card"></span>
+          SmartHealth Profile</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <ui-view></ui-view>
+  </div>
+  <script src="./app.js"></script>
+  <script src="./components/main.js"></script>
+  <script src="./components/login.js"></script>
+  <script src="./services/moph.js"></script>
+</body>
+
+</html>

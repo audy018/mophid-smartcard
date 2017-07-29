@@ -1,0 +1,108 @@
+<div style="text-align: right;">
+  <a href="javascript:void(0)" ng-disabled="reading" class="btn btn-raised btn-primary" ng-click="readSmartCard()">
+    <span class="fa fa-camera-retro"></span>
+    อ่านข้อมูลจากบัตร</a>
+  <a href="javascript:void(0)" class="btn btn-raised btn-primary">
+    <span class="fa fa-cog"></span>
+    กำหนดค่า</a>
+  <a href="javascript:void(0)" ng-click="logout()" class="btn btn-raised btn-danger">
+    <span class="fa fa-exit"></span>
+    ออกจากระบบ</a>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <span class="fa fa-address-card"></span> ข้อมูลจาก Smart Card
+        </h3>
+      </div>
+      <div class="panel-body">
+        <table class="table table-striped table-hover">
+          <tbody>
+            <tr>
+              <td><strong>เลขบัตรประชาชน</strong></td>
+              <td>{{ cid }}</td>
+              <td><strong>ชื่อ-สกุล</strong></td>
+              <td>{{thName}}</td>
+            </tr>
+            <tr>
+              <td><strong>วันเกิด</strong></td>
+              <td>{{ birthDate }}</td>
+              <td><strong>เพศ</strong></td>
+              <td>{{sex}}</td>
+            </tr>
+            <tr>
+              <td><strong>วันออกบัตร</strong></td>
+              <td>{{ issueDate }}</td>
+              <td><strong>วันหมดอายุ</strong></td>
+              <td>{{ expiredDate }}</td>
+            </tr>
+            <tr>
+              <td><strong>ที่อยู่</strong></td>
+              <td colspan="3">{{ fullAddress }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <span class="fa fa-address-card"></span> ข้อมูลจากกระทรวงสาธารณสุข (MOPHID)
+        </h3>
+      </div>
+      <div class="panel-body">
+        <table class="table table-striped table-hover">
+          <tbody>
+            <tr>
+              <td><strong>MOPH ID</strong></td>
+              <td colspan="3">{{ mophId }}</td>
+            </tr>
+            <tr>
+              <td>เลขบัตรประชาชน</td>
+              <td>{{ mophCid }}</td>
+              <td>ชื่อ-สกุล</td>
+              <td>{{mophFullname}}</td>
+            </tr>
+            <tr>
+              <td>วันเกิด</td>
+              <td>{{ mophBirthDate }}</td>
+              <td>เพศ</td>
+              <td>{{mophSex}}</td>
+            </tr>
+            <tr>
+              <td>ที่อยู่</td>
+              <td colspan="3">{{ mophFullAddress }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <span class="fa fa-address-card"></span> ข้อมูลด้านสุขภาพ
+    </h3>
+  </div>
+  <div class="panel-body">
+
+  </div>
+</div>
+
+<div class="panel panel-danger">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <span class="fa fa-address-card"></span> ข้อมูลสิทธิการรักษา (สปสช.)
+    </h3>
+  </div>
+  <div class="panel-body">
+
+  </div>
+</div>
