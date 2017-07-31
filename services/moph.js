@@ -34,11 +34,8 @@ angular.module('app').service('MophService', function ($http) {
           'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
         }
       }
-      let url = 'https://smarthealth.service.moph.go.th/phps/public/api/v2/gettoken';
-      return $http.post(url, data, config)
-        .then(function (resp) {
-          return resp.data;
-        });
+      let url = `https://smarthealth.service.moph.go.th/phps/public/api/v2/gettoken?username=${username}&password=${password}`;
+      return $http.post(url, config);
     }
   }
 
