@@ -29,13 +29,13 @@ angular.module('app').service('MophService', function ($http) {
         username: username,
         password: password
       }
-      var config = {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
-        }
-      }
-      let url = `https://smarthealth.service.moph.go.th/phps/public/api/v2/gettoken?username=${username}&password=${password}`;
-      return $http.post(url, config);
+      // var config = {
+      //   headers: {
+      //     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+      //   }
+      // }
+      let url = `https://smarthealth.service.moph.go.th/phps/public/api/v3/gettoken`;
+      return $http.post(url, {username: username, password: password});
     }
   }
 
