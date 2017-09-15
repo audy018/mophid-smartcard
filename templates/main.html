@@ -1,13 +1,28 @@
 <div style="text-align: right;">
+
+<div class="row">
+  <div class="col-md-2" style="vertical-align: middle; padding-top: 10px; font-weight: bold;">
+      เลือก Smart Card:
+  </div>
+  <div class="col-md-2">
+    <select id="select111" class="form-control" style="width: 200px;" ng-model="selectedSmartCard">
+      <option>เลือก Smart Card</option>
+      <option ng-value="s" ng-repeat="s in smartcards">{{s}}</option>
+    </select>
+  </div>
+      <div class="col-md-6">
+
   <a href="javascript:void(0)" ng-disabled="reading" class="btn btn-raised btn-primary" ng-click="readSmartCard()">
     <span class="fa fa-camera-retro"></span>
     อ่านข้อมูลจากบัตร</a>
-  <a href="javascript:void(0)" class="btn btn-raised btn-primary">
+  <a href="javascript:void(0)" ng-click="openSetting()" class="btn btn-raised btn-primary">
     <span class="fa fa-cog"></span>
     กำหนดค่า</a>
   <a href="javascript:void(0)" ng-click="logout()" class="btn btn-raised btn-danger">
     <span class="fa fa-exit"></span>
     ออกจากระบบ</a>
+      </div>
+</div>
 </div>
 
 <div class="row">
@@ -45,6 +60,9 @@
             </tr>
           </tbody>
         </table>
+        <button class="btn btn-primary">
+          <span class="fa fa-search"></span> ตรวจสอบสิทธิการรักษาจาก สปสช.
+        </button>
       </div>
     </div>
   </div>
@@ -80,12 +98,20 @@
             </tr>
           </tbody>
         </table>
+
+        <button class="btn btn-primary" ng-click="getMaxHn()">
+          <span class="fa fa-plus"></span> ขึ้นทะเบียนผู้ป่วยรายใหม่
+        </button>
+
+        <button class="btn btn-primary" disabled>
+          <span class="fa fa-search"></span> ประวัติการรักษา
+        </button>
       </div>
     </div>
   </div>
 </div>
 
-<div class="panel panel-info">
+<!-- <div class="panel panel-info">
   <div class="panel-heading">
     <h3 class="panel-title">
       <span class="fa fa-address-card"></span> ข้อมูลด้านสุขภาพ
@@ -94,15 +120,114 @@
   <div class="panel-body">
 
   </div>
-</div>
+</div> -->
 
-<div class="panel panel-danger">
+<div class="panel panel-info" ng-if="showNhsoRight">
   <div class="panel-heading">
     <h3 class="panel-title">
       <span class="fa fa-address-card"></span> ข้อมูลสิทธิการรักษา (สปสช.)
     </h3>
   </div>
   <div class="panel-body">
-
+    <table class="table table-striped table-hover">
+      <tbody>
+        <tr>
+          <td><strong>เลขบัตรประชาชน</strong></td>
+          <td>{{ nhso.person_id }}</td>
+          <td><strong>ชื่อ-สกุล</strong></td>
+          <td>{{nhso.fname}} {{nhso.lname}}</td>
+        </tr>
+        <tr>
+          <td><strong>วันเกิด</strong></td>
+          <td>{{ nhso.birthdate }}</td>
+          <td><strong>เพศ</strong></td>
+          <td>{{nhso.sex}}</td>
+        </tr>
+        <tr>
+          <td><strong>ที่อยู่</strong></td>
+          <td colspan="3">
+            {{ nhso.primary_moo }} {{nhso.primary_mooban_name}} ต.{{nhso.primary_tumbon_name}} อ.{{nhso.primary_amphur_name}} จ.{{nhso.primary_province_name}}
+          </td>
+        </tr>
+        <tr>
+          <td><strong>สิทธิการรักษา</strong></td>
+          <td colspan="3">
+            {{ nhso.maininscl }} {{nhso.maininscl_name}}
+          </td>
+        </tr>
+        <tr>
+          <td><strong>เริ่มใช้สิทธิ์</strong></td>
+          <td>{{ nhso.startdate }}</td>
+          <td><strong>วันหมดอายุ</strong></td>
+          <td>{{ nhso.expdate }}</td>
+        </tr>
+        <tr>
+          <td><strong>หน่วยบริการหลัก</strong></td>
+          <td>{{ nhso.hmain }} - {{nhso.hmain_name}}</td>
+          <td><strong>สถานบริการรอง</strong></td>
+          <td>-</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
+
+<script type="text/ng-template" id="myModalContent.html">
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-title">กำหนดค่า</h3>
+  </div>
+  <div class="modal-body" id="modal-body">
+    <uib-tabset active="activePill" type="pills">
+      <uib-tab index="0" heading="HOSxP Connection">
+        <form class="form-horizontal">
+            <div class="form-group">
+              <label for="hostName" class="col-md-3 control-label">IP/Host name</label>
+
+              <div class="col-md-9">
+                <input type="text" ng-model="config.hostname" class="form-control" id="hostName" placeholder="Hostname or IP">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="port" class="col-md-3 control-label">Port</label>
+
+              <div class="col-md-9">
+                <input type="number" ng-model="config.port" class="form-control" id="port" placeholder="3306">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="dbName" class="col-md-3 control-label">Database</label>
+              <div class="col-md-9">
+                <input type="text" ng-model="config.dbname" class="form-control" id="dbName" placeholder="hos">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="username" class="col-md-3 control-label">User</label>
+              <div class="col-md-9">
+                <input type="text" ng-model="config.username" class="form-control" id="username" placeholder="sa">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password" class="col-md-3 control-label">Password</label>
+
+              <div class="col-md-9">
+                <input type="password" ng-model="config.password" class="form-control" id="password" placeholder="Password">
+              </div>
+            </div>
+        </form>
+
+      </uib-tab>
+      <uib-tab heading="NHSO Token">
+        <div class="input-group">
+          <input type="text" ng-model="config.tokenFile" disabled class="form-control" placeholder="..." aria-label="...">
+          <span class="input-group-btn">
+            <button class="btn btn-primary btn-raised" ng-click="openTokenFile()" type="button">เลือกไฟล์...</button>
+          </span>
+        </div>
+      </uib-tab>
+    </uib-tabset>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary btn-raised" type="button" ng-click="saveSetting()">บันทึก</button>
+    <button class="btn btn-warning btn-raised" type="button" ng-click="closeModal()">ยกเลิก</button>
+  </div>
+</script>

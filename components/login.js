@@ -17,8 +17,10 @@ angular.module('app').component('login', {
             console.log(resp);
             $scope.logging = false;
             $scope.progressbar.complete();
-            sessionStorage.setItem('token', resp.jwt_token);
-            $state.go('main');
+            sessionStorage.setItem('token', resp.data.jwt_token);
+            setTimeout(function() {
+              $state.go('main');
+            }, 3000);
           })
           .catch(error => {
             $scope.logging = false;
